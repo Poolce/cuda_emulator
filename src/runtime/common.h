@@ -1,0 +1,438 @@
+#include <stdint.h>
+#include <stdio.h>
+
+typedef void *cudaStream_t;
+typedef void *CUfunction;
+typedef uint64_t cuuint64_t;
+typedef struct CUuuid_st
+{
+    char bytes[16];
+} CUuuid;
+
+extern "C"
+{
+    enum class cudaError_t
+    {
+        cudaSuccess,
+        cudaErrorMemoryAllocation,
+    };
+
+    enum CUresult
+    {
+        cudaSuccess = 0,
+        cudaErrorMemoryAllocation = 1,
+    };
+
+    enum class cudaMemcpyKind
+    {
+        cudaMemcpyHostToDevice = 0,
+        cudaMemcpyDeviceToHost = 1,
+        cudaMemcpyDeviceToDevice = 2,
+        cudaMemcpyHostToHost = 3
+    };
+
+    struct dim3
+    {
+        unsigned int x, y, z;
+        dim3(unsigned int _x = 1, unsigned int _y = 1, unsigned int _z = 1) : x(_x), y(_y), z(_z) {}
+    };
+
+    enum class CUdriverProcAddressQueryResult
+    {
+        CU_GET_PROC_ADDRESS_SUCCESS = 0,
+        CU_GET_PROC_ADDRESS_SYMBOL_NOT_FOUND = 1,
+        CU_GET_PROC_ADDRESS_VERSION_NOT_SUFFICIENT = 2
+    };
+
+    CUresult cuGetProcAddress_v2(CUfunction *hfunc, CUuuid uuid, const char *name)
+    {
+        printf("cuGetProcAddress_v2\n");
+        return cudaSuccess;
+    }
+    CUresult cuGetProcAddress(const char *symbol, void **pfn, int cudaVersion, cuuint64_t flags, CUdriverProcAddressQueryResult *symbolStatus)
+    {
+        printf("cuGetProcAddress\n");
+        return cudaSuccess;
+    }
+    void cuInit(void) {}
+    void cuDeviceGet(void) {}
+    void cuDeviceGetCount(void) {}
+    void cuDeviceGetName(void) {}
+    void cuDeviceTotalMem_v2(void) {}
+    void cuDeviceGetAttribute(void) {}
+    void cuDeviceGetP2PAttribute(void) {}
+    void cuDriverGetVersion(void) {}
+    void cuDeviceGetByPCIBusId(void) {}
+    void cuDeviceGetPCIBusId(void) {}
+    void cuDeviceGetUuid(void) {}
+    void cuDeviceGetTexture1DLinearMaxWidth(void) {}
+    void cuDeviceGetDefaultMemPool(void) {}
+    void cuDeviceSetMemPool(void) {}
+    void cuDeviceGetMemPool(void) {}
+    void cuFlushGPUDirectRDMAWrites(void) {}
+    void cuDevicePrimaryCtxRetain(void) {}
+    void cuDevicePrimaryCtxRelease(void) {}
+    void cuDevicePrimaryCtxSetFlags_v2(void) {}
+    void cuDevicePrimaryCtxGetState(void) {}
+    void cuDevicePrimaryCtxReset(void) {}
+    void cuCtxCreate_v2(void) {}
+    void cuCtxGetFlags(void) {}
+    void cuCtxSetCurrent(void) {}
+    void cuCtxGetCurrent(void) {}
+    void cuCtxDetach(void) {}
+    void cuCtxGetApiVersion(void) {}
+    void cuCtxGetDevice(void) {}
+    void cuCtxGetLimit(void) {}
+    void cuCtxSetLimit(void) {}
+    void cuCtxGetCacheConfig(void) {}
+    void cuCtxSetCacheConfig(void) {}
+    void cuCtxGetSharedMemConfig(void) {}
+    void cuCtxGetStreamPriorityRange(void) {}
+    void cuCtxSetSharedMemConfig(void) {}
+    void cuCtxSynchronize(void) {}
+    void cuCtxResetPersistingL2Cache(void) {}
+    void cuCtxPopCurrent_v2(void) {}
+    void cuCtxPushCurrent_v2(void) {}
+    void cuModuleLoad(void) {}
+    void cuModuleLoadData(void) {}
+    void cuModuleLoadFatBinary(void) {}
+    void cuModuleUnload(void) {}
+    void cuModuleGetFunction(void) {}
+    void cuModuleGetGlobal_v2(void) {}
+    void cuModuleGetTexRef(void) {}
+    void cuModuleGetSurfRef(void) {}
+    void cuModuleGetLoadingMode(void) {}
+    void cuLibraryLoadData(void) {}
+    void cuLibraryLoadFromFile(void) {}
+    void cuLibraryUnload(void) {}
+    void cuLibraryGetKernel(void) {}
+    void cuLibraryGetModule(void) {}
+    void cuKernelGetFunction(void) {}
+    void cuLibraryGetGlobal(void) {}
+    void cuLibraryGetManaged(void) {}
+    void cuKernelGetAttribute(void) {}
+    void cuKernelSetAttribute(void) {}
+    void cuKernelSetCacheConfig(void) {}
+    void cuLinkCreate(void) {}
+    void cuLinkAddData(void) {}
+    void cuLinkAddFile(void) {}
+    void cuLinkComplete(void) {}
+    void cuLinkDestroy(void) {}
+    void cuMemGetInfo_v2(void) {}
+    void cuMemAllocManaged(void) {}
+    void cuMemAlloc_v2(void) {}
+    void cuMemAllocPitch_v2(void) {}
+    void cuMemFree_v2(void) {}
+    void cuMemGetAddressRange_v2(void) {}
+    void cuMemFreeHost(void) {}
+    void cuMemHostAlloc(void) {}
+    void cuMemHostGetDevicePointer_v2(void) {}
+    void cuMemHostGetFlags(void) {}
+    void cuMemHostRegister_v2(void) {}
+    void cuMemHostUnregister(void) {}
+    void cuPointerGetAttribute(void) {}
+    void cuPointerGetAttributes(void) {}
+    void cuMemAllocAsync(void) {}
+    void cuMemAllocAsync_ptsz(void) {}
+    void cuMemAllocFromPoolAsync(void) {}
+    void cuMemAllocFromPoolAsync_ptsz(void) {}
+    void cuMemFreeAsync(void) {}
+    void cuMemFreeAsync_ptsz(void) {}
+    void cuMemPoolTrimTo(void) {}
+    void cuMemPoolSetAttribute(void) {}
+    void cuMemPoolGetAttribute(void) {}
+    void cuMemPoolSetAccess(void) {}
+    void cuMemPoolGetAccess(void) {}
+    void cuMemPoolCreate(void) {}
+    void cuMemPoolDestroy(void) {}
+    void cuMemPoolExportToShareableHandle(void) {}
+    void cuMemPoolImportFromShareableHandle(void) {}
+    void cuMemPoolExportPointer(void) {}
+    void cuMemPoolImportPointer(void) {}
+    void cuMemcpy(void) {}
+    void cuMemcpy_ptds(void) {}
+    void cuMemcpyAsync(void) {}
+    void cuMemcpyAsync_ptsz(void) {}
+    void cuMemcpyPeer(void) {}
+    void cuMemcpyPeer_ptds(void) {}
+    void cuMemcpyPeerAsync(void) {}
+    void cuMemcpyPeerAsync_ptsz(void) {}
+    void cuMemcpyHtoD_v2(void) {}
+    void cuMemcpyHtoD_v2_ptds(void) {}
+    void cuMemcpyHtoDAsync_v2(void) {}
+    void cuMemcpyHtoDAsync_v2_ptsz(void) {}
+    void cuMemcpyDtoH_v2(void) {}
+    void cuMemcpyDtoH_v2_ptds(void) {}
+    void cuMemcpyDtoHAsync_v2(void) {}
+    void cuMemcpyDtoHAsync_v2_ptsz(void) {}
+    void cuMemcpyDtoD_v2(void) {}
+    void cuMemcpyDtoD_v2_ptds(void) {}
+    void cuMemcpyDtoDAsync_v2(void) {}
+    void cuMemcpyDtoDAsync_v2_ptsz(void) {}
+    void cuMemcpy2DUnaligned_v2(void) {}
+    void cuMemcpy2DUnaligned_v2_ptds(void) {}
+    void cuMemcpy2DAsync_v2(void) {}
+    void cuMemcpy2DAsync_v2_ptsz(void) {}
+    void cuMemcpy3D_v2(void) {}
+    void cuMemcpy3D_v2_ptds(void) {}
+    void cuMemcpy3DAsync_v2(void) {}
+    void cuMemcpy3DAsync_v2_ptsz(void) {}
+    void cuMemcpy3DPeer(void) {}
+    void cuMemcpy3DPeer_ptds(void) {}
+    void cuMemcpy3DPeerAsync(void) {}
+    void cuMemcpy3DPeerAsync_ptsz(void) {}
+    void cuMemsetD8_v2(void) {}
+    void cuMemsetD8_v2_ptds(void) {}
+    void cuMemsetD8Async(void) {}
+    void cuMemsetD8Async_ptsz(void) {}
+    void cuMemsetD2D8_v2(void) {}
+    void cuMemsetD2D8_v2_ptds(void) {}
+    void cuMemsetD2D8Async(void) {}
+    void cuMemsetD2D8Async_ptsz(void) {}
+    void cuFuncSetCacheConfig(void) {}
+    void cuFuncSetSharedMemConfig(void) {}
+    void cuFuncGetAttribute(void) {}
+    void cuFuncSetAttribute(void) {}
+    void cuArrayCreate_v2(void) {}
+    void cuArrayGetDescriptor_v2(void) {}
+    void cuArrayGetSparseProperties(void) {}
+    void cuArrayGetPlane(void) {}
+    void cuArray3DCreate_v2(void) {}
+    void cuArray3DGetDescriptor_v2(void) {}
+    void cuArrayDestroy(void) {}
+    void cuMipmappedArrayCreate(void) {}
+    void cuMipmappedArrayGetLevel(void) {}
+    void cuMipmappedArrayGetSparseProperties(void) {}
+    void cuMipmappedArrayDestroy(void) {}
+    void cuArrayGetMemoryRequirements(void) {}
+    void cuMipmappedArrayGetMemoryRequirements(void) {}
+    void cuTexObjectCreate(void) {}
+    void cuTexObjectDestroy(void) {}
+    void cuTexObjectGetResourceDesc(void) {}
+    void cuTexObjectGetTextureDesc(void) {}
+    void cuTexObjectGetResourceViewDesc(void) {}
+    void cuSurfObjectCreate(void) {}
+    void cuSurfObjectDestroy(void) {}
+    void cuSurfObjectGetResourceDesc(void) {}
+    void cuImportExternalMemory(void) {}
+    void cuExternalMemoryGetMappedBuffer(void) {}
+    void cuExternalMemoryGetMappedMipmappedArray(void) {}
+    void cuDestroyExternalMemory(void) {}
+    void cuImportExternalSemaphore(void) {}
+    void cuSignalExternalSemaphoresAsync(void) {}
+    void cuSignalExternalSemaphoresAsync_ptsz(void) {}
+    void cuWaitExternalSemaphoresAsync(void) {}
+    void cuWaitExternalSemaphoresAsync_ptsz(void) {}
+    void cuDestroyExternalSemaphore(void) {}
+    void cuDeviceGetNvSciSyncAttributes(void) {}
+    void cuLaunchKernel(void) {}
+    void cuLaunchKernel_ptsz(void) {}
+    void cuLaunchCooperativeKernel(void) {}
+    void cuLaunchCooperativeKernel_ptsz(void) {}
+    void cuLaunchCooperativeKernelMultiDevice(void) {}
+    void cuLaunchHostFunc(void) {}
+    void cuLaunchHostFunc_ptsz(void) {}
+    void cuLaunchKernelEx(void) {}
+    void cuLaunchKernelEx_ptsz(void) {}
+    void cuEventCreate(void) {}
+    void cuEventRecord(void) {}
+    void cuEventRecord_ptsz(void) {}
+    void cuEventRecordWithFlags(void) {}
+    void cuEventRecordWithFlags_ptsz(void) {}
+    void cuEventQuery(void) {}
+    void cuEventSynchronize(void) {}
+    void cuEventDestroy_v2(void) {}
+    void cuEventElapsedTime(void) {}
+    void cuStreamWaitValue32(void) {}
+    void cuStreamWaitValue32_ptsz(void) {}
+    void cuStreamWriteValue32(void) {}
+    void cuStreamWriteValue32_ptsz(void) {}
+    void cuStreamWaitValue64(void) {}
+    void cuStreamWaitValue64_ptsz(void) {}
+    void cuStreamWriteValue64(void) {}
+    void cuStreamWriteValue64_ptsz(void) {}
+    void cuStreamBatchMemOp(void) {}
+    void cuStreamBatchMemOp_ptsz(void) {}
+    void cuStreamCreate(void) {}
+    void cuStreamCreateWithPriority(void) {}
+    void cuStreamGetPriority(void) {}
+    void cuStreamGetPriority_ptsz(void) {}
+    void cuStreamGetFlags(void) {}
+    void cuStreamGetCtx(void) {}
+    void cuStreamGetFlags_ptsz(void) {}
+    void cuStreamGetId(void) {}
+    void cuStreamGetId_ptsz(void) {}
+    void cuStreamDestroy_v2(void) {}
+    void cuStreamWaitEvent(void) {}
+    void cuStreamWaitEvent_ptsz(void) {}
+    void cuStreamAddCallback(void) {}
+    void cuStreamAddCallback_ptsz(void) {}
+    void cuStreamSynchronize(void) {}
+    void cuStreamSynchronize_ptsz(void) {}
+    void cuStreamQuery(void) {}
+    void cuStreamQuery_ptsz(void) {}
+    void cuStreamAttachMemAsync(void) {}
+    void cuStreamAttachMemAsync_ptsz(void) {}
+    void cuStreamCopyAttributes(void) {}
+    void cuStreamCopyAttributes_ptsz(void) {}
+    void cuStreamGetAttribute(void) {}
+    void cuStreamGetAttribute_ptsz(void) {}
+    void cuStreamSetAttribute(void) {}
+    void cuStreamSetAttribute_ptsz(void) {}
+    void cuDeviceCanAccessPeer(void) {}
+    void cuCtxEnablePeerAccess(void) {}
+    void cuCtxDisablePeerAccess(void) {}
+    void cuIpcGetEventHandle(void) {}
+    void cuIpcOpenEventHandle(void) {}
+    void cuIpcGetMemHandle(void) {}
+    void cuIpcOpenMemHandle(void) {}
+    void cuIpcOpenMemHandle_v2(void) {}
+    void cuIpcCloseMemHandle(void) {}
+    void cuGLCtxCreate_v2(void) {}
+    void cuGLInit(void) {}
+    void cuGLGetDevices(void) {}
+    void cuGLRegisterBufferObject(void) {}
+    void cuGLMapBufferObject_v2(void) {}
+    void cuGLMapBufferObject_v2_ptds(void) {}
+    void cuGLMapBufferObjectAsync_v2(void) {}
+    void cuGLMapBufferObjectAsync_v2_ptsz(void) {}
+    void cuGLUnmapBufferObject(void) {}
+    void cuGLUnmapBufferObjectAsync(void) {}
+    void cuGLUnregisterBufferObject(void) {}
+    void cuGLSetBufferObjectMapFlags(void) {}
+    void cuGraphicsGLRegisterImage(void) {}
+    void cuGraphicsGLRegisterBuffer(void) {}
+    void cuGraphicsEGLRegisterImage(void) {}
+    void cuEGLStreamConsumerConnect(void) {}
+    void cuEGLStreamConsumerDisconnect(void) {}
+    void cuEGLStreamConsumerAcquireFrame(void) {}
+    void cuEGLStreamConsumerReleaseFrame(void) {}
+    void cuEGLStreamProducerConnect(void) {}
+    void cuEGLStreamProducerDisconnect(void) {}
+    void cuEGLStreamProducerPresentFrame(void) {}
+    void cuEGLStreamProducerReturnFrame(void) {}
+    void cuGraphicsResourceGetMappedEglFrame(void) {}
+    void cuEGLStreamConsumerConnectWithFlags(void) {}
+    void cuGraphicsUnregisterResource(void) {}
+    void cuGraphicsMapResources(void) {}
+    void cuGraphicsMapResources_ptsz(void) {}
+    void cuGraphicsUnmapResources(void) {}
+    void cuGraphicsUnmapResources_ptsz(void) {}
+    void cuGraphicsResourceSetMapFlags_v2(void) {}
+    void cuGraphicsSubResourceGetMappedArray(void) {}
+    void cuGraphicsResourceGetMappedMipmappedArray(void) {}
+    void cuGraphicsResourceGetMappedPointer_v2(void) {}
+    void cuProfilerInitialize(void) {}
+    void cuProfilerStart(void) {}
+    void cuProfilerStop(void) {}
+    void cuVDPAUGetDevice(void) {}
+    void cuVDPAUCtxCreate_v2(void) {}
+    void cuGraphicsVDPAURegisterVideoSurface(void) {}
+    void cuGraphicsVDPAURegisterOutputSurface(void) {}
+    void cuGetExportTable(void) {}
+    void cuOccupancyMaxActiveBlocksPerMultiprocessorWithFlags(void) {}
+    void cuOccupancyAvailableDynamicSMemPerBlock(void) {}
+    void cuOccupancyMaxPotentialClusterSize(void) {}
+    void cuOccupancyMaxActiveClusters(void) {}
+    void cuMemAdvise(void) {}
+    void cuMemPrefetchAsync(void) {}
+    void cuMemPrefetchAsync_ptsz(void) {}
+    void cuMemRangeGetAttribute(void) {}
+    void cuMemRangeGetAttributes(void) {}
+    void cuGetErrorString(void) {}
+    void cuGetErrorName(void) {}
+    void cuGraphCreate(void) {}
+    void cuGraphAddKernelNode_v2(void) {}
+    void cuGraphKernelNodeGetParams_v2(void) {}
+    void cuGraphKernelNodeSetParams_v2(void) {}
+    void cuGraphAddMemcpyNode(void) {}
+    void cuGraphMemcpyNodeGetParams(void) {}
+    void cuGraphMemcpyNodeSetParams(void) {}
+    void cuGraphAddMemsetNode(void) {}
+    void cuGraphMemsetNodeGetParams(void) {}
+    void cuGraphMemsetNodeSetParams(void) {}
+    void cuGraphAddHostNode(void) {}
+    void cuGraphHostNodeGetParams(void) {}
+    void cuGraphHostNodeSetParams(void) {}
+    void cuGraphAddChildGraphNode(void) {}
+    void cuGraphChildGraphNodeGetGraph(void) {}
+    void cuGraphAddEmptyNode(void) {}
+    void cuGraphAddEventRecordNode(void) {}
+    void cuGraphEventRecordNodeGetEvent(void) {}
+    void cuGraphEventRecordNodeSetEvent(void) {}
+    void cuGraphAddEventWaitNode(void) {}
+    void cuGraphEventWaitNodeGetEvent(void) {}
+    void cuGraphEventWaitNodeSetEvent(void) {}
+    void cuGraphAddExternalSemaphoresSignalNode(void) {}
+    void cuGraphExternalSemaphoresSignalNodeGetParams(void) {}
+    void cuGraphExternalSemaphoresSignalNodeSetParams(void) {}
+    void cuGraphAddExternalSemaphoresWaitNode(void) {}
+    void cuGraphExternalSemaphoresWaitNodeGetParams(void) {}
+    void cuGraphExternalSemaphoresWaitNodeSetParams(void) {}
+    void cuGraphExecExternalSemaphoresSignalNodeSetParams(void) {}
+    void cuGraphExecExternalSemaphoresWaitNodeSetParams(void) {}
+    void cuGraphAddMemAllocNode(void) {}
+    void cuGraphMemAllocNodeGetParams(void) {}
+    void cuGraphAddMemFreeNode(void) {}
+    void cuGraphMemFreeNodeGetParams(void) {}
+    void cuDeviceGraphMemTrim(void) {}
+    void cuDeviceGetGraphMemAttribute(void) {}
+    void cuDeviceSetGraphMemAttribute(void) {}
+    void cuGraphClone(void) {}
+    void cuGraphNodeFindInClone(void) {}
+    void cuGraphNodeGetType(void) {}
+    void cuGraphGetNodes(void) {}
+    void cuGraphGetRootNodes(void) {}
+    void cuGraphGetEdges(void) {}
+    void cuGraphNodeGetDependencies(void) {}
+    void cuGraphNodeGetDependentNodes(void) {}
+    void cuGraphAddDependencies(void) {}
+    void cuGraphRemoveDependencies(void) {}
+    void cuGraphDestroyNode(void) {}
+    void cuGraphInstantiate(void) {}
+    void cuGraphInstantiate_v2(void) {}
+    void cuGraphInstantiateWithFlags(void) {}
+    void cuGraphUpload(void) {}
+    void cuGraphUpload_ptsz(void) {}
+    void cuGraphLaunch(void) {}
+    void cuGraphLaunch_ptsz(void) {}
+    void cuGraphExecDestroy(void) {}
+    void cuGraphDestroy(void) {}
+    void cuStreamBeginCapture(void) {}
+    void cuStreamBeginCapture_ptsz(void) {}
+    void cuStreamBeginCapture_v2(void) {}
+    void cuStreamBeginCapture_v2_ptsz(void) {}
+    void cuStreamEndCapture(void) {}
+    void cuStreamEndCapture_ptsz(void) {}
+    void cuStreamIsCapturing(void) {}
+    void cuStreamIsCapturing_ptsz(void) {}
+    void cuStreamGetCaptureInfo(void) {}
+    void cuStreamGetCaptureInfo_ptsz(void) {}
+    void cuStreamGetCaptureInfo_v2(void) {}
+    void cuStreamGetCaptureInfo_v2_ptsz(void) {}
+    void cuStreamUpdateCaptureDependencies(void) {}
+    void cuStreamUpdateCaptureDependencies_ptsz(void) {}
+    void cuGraphExecKernelNodeSetParams_v2(void) {}
+    void cuGraphExecMemcpyNodeSetParams(void) {}
+    void cuGraphExecMemsetNodeSetParams(void) {}
+    void cuGraphExecHostNodeSetParams(void) {}
+    void cuGraphExecChildGraphNodeSetParams(void) {}
+    void cuGraphExecEventRecordNodeSetEvent(void) {}
+    void cuGraphExecEventWaitNodeSetEvent(void) {}
+    void cuThreadExchangeStreamCaptureMode(void) {}
+    void cuGraphExecUpdate_v2(void) {}
+    void cuGraphKernelNodeCopyAttributes(void) {}
+    void cuGraphKernelNodeGetAttribute(void) {}
+    void cuGraphKernelNodeSetAttribute(void) {}
+    void cuGraphDebugDotPrint(void) {}
+    void cuUserObjectCreate(void) {}
+    void cuUserObjectRetain(void) {}
+    void cuUserObjectRelease(void) {}
+    void cuGraphRetainUserObject(void) {}
+    void cuGraphReleaseUserObject(void) {}
+    void cuGraphNodeSetEnabled(void) {}
+    void cuGraphNodeGetEnabled(void) {}
+    void cuGraphInstantiateWithParams(void) {}
+    void cuGraphInstantiateWithParams_ptsz(void) {}
+    void cuGraphExecGetFlags(void) {}
+}
