@@ -3,7 +3,7 @@
 cudaError_t cudaMalloc(void **devPtr, size_t size)
 {
     *devPtr = malloc(size);
-    if (*devPtr == NULL)
+    if (*devPtr == nullptr)
     {
         return cudaError_t::cudaErrorMemoryAllocation;
     }
@@ -54,10 +54,12 @@ const char *cudaGetErrorString(cudaError_t error)
 cudaError_t cudaLaunchKernel(const void *func, dim3 gridDim, dim3 blockDim,
                              void **args, size_t sharedMem, cudaStream_t stream)
 {
+    std::cout << "cudaLaunchKernel"<<"\t\n";
     return cudaError_t::cudaSuccess;
 }
 
 cudaError_t cudaDeviceSynchronize()
 {
+    std::cout << "cudaDeviceSynchronize\n";
     return cudaError_t::cudaSuccess;
 }
